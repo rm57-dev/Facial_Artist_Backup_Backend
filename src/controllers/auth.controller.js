@@ -4,10 +4,9 @@ const bcrypt = require('bcrypt');
 
 class AuthController {
     async login(req, res) {
-        const {email, password, clave} = req.body;
-        const contrasena = password || clave; 
+        const {email, password} = req.body;
 
-        console.log("🟢 Datos recibidos en login:", { email, password, clave, contrasena });
+        console.log("🟢 Datos recibidos en login:", { email, password });
 
 
     try {
@@ -22,7 +21,7 @@ class AuthController {
         const usuario = usuarios[0];
 
         // Verificar contraseña con bcrypt
-        const esValida = await bcrypt.compare(contrasena, usuario.clave);
+        const esValida = await bcrypt.compare(password, usuario.clave);
         
         if (!esValida) {
             return res.status(401).json({error: 'Contraseña incorrecta'});
