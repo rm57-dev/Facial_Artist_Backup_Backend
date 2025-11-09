@@ -66,19 +66,20 @@ CREATE TABLE Cita (
     nota VARCHAR(255),
     estado ENUM('pendiente', 'confirmada', 'cancelada', 'completada') DEFAULT 'pendiente',
     id_usuario INT,
-    id_profesional INT,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
-    FOREIGN KEY (id_profesional) REFERENCES Profesional(id_profesional)
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
 
 select * from usuarios;
 select * from Cita;
+select * from roles;
+select * from permisos;
+select * from rol_permiso;
 
 
 -- Insertar roles
 INSERT INTO roles (nombre) VALUES
 ('Administrador'),
-('Empleado');
+('Usuario');
 
 -- Insertar permisos
 INSERT INTO permisos (nombre, descripcion) VALUES
@@ -94,8 +95,11 @@ INSERT INTO rol_permiso (id_rol, permiso_id) VALUES
 (1, 3),  -- Actualizar
 (1, 4);  -- Eliminar
 
--- Asignar permisos al rol Empleado (id_rol = 2), solo leer
 INSERT INTO rol_permiso (id_rol, permiso_id) VALUES
-(2, 2);
+(2, 1),
+(2, 2),
+(2, 3),
+(2, 4);
 
 
+drop database facialArtist;
