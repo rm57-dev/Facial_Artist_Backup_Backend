@@ -48,14 +48,14 @@ class UsuariosController {
 
   // Agregar un usuario nuevo
   async agregarUsuario(req, res) {
-    const { nombre, email, clave, id_rol } = req.body;
+    const { nombre, apellido, email, telefono, fecha_nacimiento, clave, id_rol} = req.body;
     try {
       // Cifrar clave
       const hash = await bcrypt.hash(clave, 10);
 
       await db.query(
-        'INSERT INTO usuarios (nombre, email, clave, id_rol) VALUES (?, ?, ?, ?)',
-        [nombre, email, hash, id_rol]
+        'INSERT INTO usuarios (nombre, apellido, email, telefono, fecha_nacimiento, clave, id_rol) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        [nombre, apellido, email, telefono, fecha_nacimiento, hash, id_rol]
       );
 
       res.json({ mensaje: 'Usuario agregado correctamente' });
