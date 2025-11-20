@@ -68,9 +68,11 @@ CREATE TABLE Cita (
     hora TIME NOT NULL,
     nota VARCHAR(255),
     estado ENUM('pendiente', 'confirmada', 'cancelada', 'completada') DEFAULT 'pendiente',
+    email VARCHAR(150) NOT NULL,
     id_usuario INT,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
+
 
 select * from usuarios;
 select * from Cita;
